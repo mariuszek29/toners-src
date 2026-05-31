@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg-base text-text-primary font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-base;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-bg-border rounded-full;
+  }
+
+  ::selection {
+    @apply bg-accent-green text-bg-base;
+  }
+}
+
+@layer components {
+  .mono { @apply font-mono; }
+
+  /* Terminal-style green dot indicator */
+  .live-dot {
+    @apply inline-block w-2 h-2 rounded-full bg-accent-green;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Score badge */
+  .score-badge {
+    @apply font-mono text-xs px-2 py-0.5 rounded border;
+  }
+
+  .score-high { @apply score-badge border-accent-green text-accent-green bg-accent-green/10; }
+  .score-mid  { @apply score-badge border-accent-amber text-accent-amber bg-accent-amber/10; }
+  .score-low  { @apply score-badge border-accent-red text-accent-red bg-accent-red/10; }
+
+  /* Sentiment badges */
+  .badge-bullish { @apply text-accent-green bg-accent-green/10 border border-accent-green/30 text-xs font-mono px-2 py-0.5 rounded; }
+  .badge-neutral { @apply text-text-secondary bg-bg-elevated border border-bg-border text-xs font-mono px-2 py-0.5 rounded; }
+  .badge-bearish { @apply text-accent-red bg-accent-red/10 border border-accent-red/30 text-xs font-mono px-2 py-0.5 rounded; }
+
+  /* Card */
+  .card {
+    @apply bg-bg-surface border border-bg-border rounded-lg;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-accent-green/40 hover:bg-bg-elevated cursor-pointer;
+  }
+
+  /* Section label */
+  .section-label {
+    @apply text-xs font-mono text-text-muted uppercase tracking-widest;
+  }
+
+  /* Ticker tape */
+  .ticker-wrap {
+    @apply overflow-hidden whitespace-nowrap;
+  }
+
+  .ticker-content {
+    @apply inline-block animate-ticker;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px #00ff88; }
+  50% { opacity: 0.5; box-shadow: none; }
+}
